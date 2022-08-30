@@ -11,12 +11,19 @@ app-logs:
 	docker-compose logs -f app
 
 makemigrations:
-	docker-compose run --rm app sh -c "python manage.py wait_for_db &&
-	                                   python manage.py makemigrations"
+	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py makemigrations"
 
 migrate:
-	docker-compose run --rm app sh -c "python manage.py wait_for_db &&
-	                                   python manage.py migrate"
+	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py migrate"
+
+test:
+	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
+
+createsuperuser:
+	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py createsuperuser"
+
+remove-volume:
+	docker volume rm recipe-app-api-v2_dev-db-data
 
 lint:
 	docker-compose run --rm app sh -c "black --exclude=migrations ."
