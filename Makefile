@@ -16,6 +16,9 @@ makemigrations:
 migrate:
 	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py migrate"
 
+startapp:
+	docker-compose run --rm app sh -c "python manage.py startapp ${APP}"
+
 test:
 	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
 
