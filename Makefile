@@ -46,3 +46,6 @@ make gadd:
 
 make gcommit:
 	git commit -am "${MESSAGE}"
+
+make gpush:
+	git push -u origin ${BRANCH}
