@@ -37,3 +37,12 @@ quality_checks:
 	docker-compose run --rm app sh -c "flake8"
 	docker-compose run --rm app sh -c "black --check --exclude=migrations ."
 	docker-compose run --rm app sh -c "isort ./*/*.py --check-only"
+
+gs:
+	git status
+
+make gadd:
+	git add .
+
+make gcommit:
+	git commit -am "${MESSAGE}"
