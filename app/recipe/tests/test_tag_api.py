@@ -79,3 +79,15 @@ class PrivateTagsAPITests(APITestCase):
         self.assertEqual(res.data, serializer.data)
         self.assertEqual(res.data[0]["name"], tag.name)
         self.assertEqual(res.data[0]["id"], tag.id)
+
+    def test_update_tag(self):
+        """Test updating tag."""
+        tag = create_tag(user=self.user, name="After dinner")
+
+        payload = {"name": "Dessert"}
+        url = detail_url(tag.id)
+        res = self.client.patch(url, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        tag.refresh_from_db()
+        self.assertEqual(tag.name, payload["name"])
